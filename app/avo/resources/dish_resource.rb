@@ -18,5 +18,13 @@ class DishResource < Avo::BaseResource
   field :category, as: :belongs_to, required: true, placeholder: "Categoría"
   field :price, as: :number, min: 0, required: true, placeholder: "Precio"
   field :price_type, as: :select, required: true, enum: ::Dish.price_types, display_with_value: true, placeholder: "Elige el tipo de precio."
+  field :cover, as: :file, is_image: true
   # add fields here
+
+  self.default_view_type = :grid
+  grid do
+    cover :cover, as: :file, link_to_resource: true
+    title :name, as: :text, link_to_resource: true
+    body :description, as: :text
+  end
 end
